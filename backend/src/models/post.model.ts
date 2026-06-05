@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../config/db";
+import { User } from "./user.model";
 
 export const Post = sequelize.define(
   "Post",
@@ -12,9 +13,18 @@ export const Post = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+
+      references: {
+        model: User,
+        key: "id",
+      },
+    },
   },
   {
     timestamps: true,
-    tableName: "users",
+    tableName: "posts",
   },
 );

@@ -6,6 +6,11 @@ import { sequelize } from "./config/db";
 
 const app = express();
 
+sequelize
+  .authenticate()
+  .then(() => console.log("DB Connected"))
+  .catch(console.error);
+
 sequelize.sync();
 
 app.use(express.json());
