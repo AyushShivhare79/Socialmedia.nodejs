@@ -3,6 +3,7 @@ import "dotenv/config";
 import cookieParser from "cookie-parser";
 import route from "./routes/index.route";
 import { sequelize } from "./config/db";
+import cors from "cors";
 
 const app = express();
 
@@ -12,6 +13,13 @@ sequelize
   .catch(console.error);
 
 sequelize.sync();
+
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true,
+  }),
+);
 
 app.use(express.json());
 app.use(express.urlencoded());
