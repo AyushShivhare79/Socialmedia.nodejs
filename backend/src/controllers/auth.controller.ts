@@ -4,6 +4,15 @@ import bcrypt from "bcryptjs";
 import { User } from "../models/user.model";
 import { HTTP_STATUS } from "../constants/http-status";
 
+export const getMe = async (req: Request, res: Response) => {
+  const userId = req.user?.id;
+  const user = await User.findByPk(userId, {
+    attributes: { exclude: ["password", "createdAt", "updatedAt"] },
+  });
+
+  res.status(HTTP_STATUS.OK).json(user);
+};
+
 export const signUp = async (req: Request, res: Response) => {
   const { name, email, password } = req.body;
 

@@ -4,6 +4,9 @@ import cookieParser from "cookie-parser";
 import route from "./routes/index.route";
 import { sequelize } from "./config/db";
 import cors from "cors";
+import authMiddleware from "./middlewares/auth.middleware";
+import { User } from "./models/user.model";
+import { HTTP_STATUS } from "./constants/http-status";
 
 const app = express();
 
