@@ -3,7 +3,9 @@ import { Navigate, Outlet } from "react-router";
 import { getMe } from "../services/auth.service";
 
 export default function ProtectedRoute() {
-  const [status, setStatus] = useState<"loading" | "authenticated" | "unauthenticated">("loading");
+  const [status, setStatus] = useState<
+    "loading" | "authenticated" | "unauthenticated"
+  >("loading");
 
   useEffect(() => {
     const verifyUser = async () => {
@@ -19,7 +21,7 @@ export default function ProtectedRoute() {
   }, []);
 
   if (status === "loading") {
-    return <div>Loading...</div>;
+    return null;
   }
 
   if (status === "unauthenticated") {

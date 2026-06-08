@@ -94,7 +94,9 @@ export const getAllPosts = async (req: Request, res: Response) => {
 };
 
 export const deletePost = async (req: Request, res: Response) => {
-  const { postId } = req.body;
+  const { postId } = req.query;
+
+  console.log("POsttttttttttttt: ", postId);
 
   const userId = req.user?.id;
 

@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { signInApi } from "../../services/auth.service";
+import { useNavigate } from "react-router";
+import styles from "./Auth.module.css";
 
 export default function Signin() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -33,38 +36,53 @@ export default function Signin() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Sign In</h2>
+    <div className={styles.authPage}>
+      <div className={styles.card}>
+        <div className={styles.header}>
+          <div className={styles.logoIcon}>🔐</div>
+          <h1 className={styles.title}>Welcome Back</h1>
+          <p className={styles.subtitle}>Sign in to continue to your feed</p>
+        </div>
 
-      <div>
-        <label>Email</label>
-        <br />
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Email</label>
+            <input
+              className={styles.input}
+              type="email"
+              name="email"
+              placeholder="you@example.com"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Password</label>
+            <input
+              className={styles.input}
+              type="password"
+              name="password"
+              placeholder="••••••••"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <button className={styles.submitBtn} type="submit">
+            Sign In
+          </button>
+        </form>
+
+        <p className={styles.footer}>
+          Don't have an account?{" "}
+          <span className={styles.footerLink} onClick={() => navigate("/signup")}>
+            Sign Up
+          </span>
+        </p>
       </div>
-
-      <br />
-
-      <div>
-        <label>Password</label>
-        <br />
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
-      </div>
-
-      <br />
-
-      <button type="submit">Sign In</button>
-    </form>
+    </div>
   );
 }

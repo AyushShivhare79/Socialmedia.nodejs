@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { signUpApi } from "../../services/auth.service";
+import { useNavigate } from "react-router";
+import styles from "./Auth.module.css";
 
 export default function Signup() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -32,52 +35,66 @@ export default function Signup() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Sign Up</h2>
+    <div className={styles.authPage}>
+      <div className={styles.card}>
+        <div className={styles.header}>
+          <div className={styles.logoIcon}>✨</div>
+          <h1 className={styles.title}>Create Account</h1>
+          <p className={styles.subtitle}>Join the community today</p>
+        </div>
 
-      <div>
-        <label>Name</label>
-        <br />
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Name</label>
+            <input
+              className={styles.input}
+              type="text"
+              name="name"
+              placeholder="Your full name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Email</label>
+            <input
+              className={styles.input}
+              type="email"
+              name="email"
+              placeholder="you@example.com"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Password</label>
+            <input
+              className={styles.input}
+              type="password"
+              name="password"
+              placeholder="••••••••"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <button className={styles.submitBtn} type="submit">
+            Create Account
+          </button>
+        </form>
+
+        <p className={styles.footer}>
+          Already have an account?{" "}
+          <span className={styles.footerLink} onClick={() => navigate("/signin")}>
+            Sign In
+          </span>
+        </p>
       </div>
-
-      <br />
-
-      <div>
-        <label>Email</label>
-        <br />
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-      </div>
-
-      <br />
-
-      <div>
-        <label>Password</label>
-        <br />
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
-      </div>
-
-      <br />
-
-      <button type="submit">Sign Up</button>
-    </form>
+    </div>
   );
 }

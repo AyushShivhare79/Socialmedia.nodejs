@@ -1,7 +1,10 @@
 import { useState } from "react";
-import { createPostApi } from "../../services/product.service";
+import { createPostApi } from "../../services/post.service";
+import { useNavigate } from "react-router";
+import styles from "./CreatePost.module.css";
 
 export default function CreatePost() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -25,43 +28,54 @@ export default function CreatePost() {
         title: "",
         description: "",
       });
+
+      navigate("/home");
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-    <form onSubmit={handlePublish}>
-      <h2>Create Post</h2>
+    <div className={styles.page}>
+      <div className={styles.card}>
+        <div className={styles.headerRow}>
+          <button className={styles.backBtn} onClick={() => navigate("/home")}>
+            ←
+          </button>
+          <h1 className={styles.title}>Create Post</h1>
+        </div>
 
-      <div>
-        <label>Title</label>
-        <br />
-        <input
-          type="text"
-          name="title"
-          value={formData.title}
-          onChange={handleChange}
-          required
-        />
+        <form className={styles.form} onSubmit={handlePublish}>
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Title</label>
+            <input
+              className={styles.input}
+              type="text"
+              name="title"
+              placeholder="Give your post a title..."
+              value={formData.title}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Description</label>
+            <textarea
+              className={styles.textarea}
+              name="description"
+              placeholder="Write something interesting..."
+              value={formData.description}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <button className={styles.publishBtn} type="submit">
+            ✨ Publish Post
+          </button>
+        </form>
       </div>
-
-      <br />
-
-      <div>
-        <label>Description</label>
-        <br />
-        <textarea
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-          required
-        />
-      </div>
-
-      <br />
-
-      <button type="submit">Publish</button>
-    </form>
+    </div>
   );
 }

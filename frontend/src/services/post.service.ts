@@ -15,14 +15,18 @@ export const createPostApi = async (payload: {
   return response.data;
 };
 
-export const editPostApi = async () => {
-  const response = await api.put("/post/edit");
+export const editPostApi = async (payload: {
+  postId: number;
+  title: string;
+  description: string;
+}) => {
+  const response = await api.put("/post/edit", payload);
 
   return response.data;
 };
 
-export const deletePostApi = async () => {
-  const response = await api.delete("/post");
+export const deletePostApi = async (postId: number) => {
+  const response = await api.delete("/post", { params: { postId: postId } });
 
   return response.data;
 };
