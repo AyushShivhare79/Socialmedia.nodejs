@@ -32,6 +32,6 @@ export const Comment = sequelize.define(
 
   {
     timestamps: true,
-    tableName: "posts",
+    tableName: "comments",
   },
 );

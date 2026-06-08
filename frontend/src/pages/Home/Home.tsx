@@ -3,6 +3,7 @@ import { deletePostApi, getPostsApi } from "../../services/post.service";
 import { useNavigate } from "react-router";
 import { getMe } from "../../services/auth.service";
 import styles from "./Home.module.css";
+import { Link } from "react-router";
 
 export default function Home() {
   const [user, setUser] = useState<any>();
@@ -68,7 +69,17 @@ export default function Home() {
             const myPost = post?.userId === user?.id;
 
             return (
-              <div className={styles.postCard} key={post.id}>
+              <div
+                onClick={() =>
+                  navigate("/comment", {
+                    state: {
+                      postId: post?.id,
+                    },
+                  })
+                }
+                className={styles.postCard}
+                key={post.id}
+              >
                 <div className={styles.postContent}>
                   <h2 className={styles.postTitle}>{post.title}</h2>
 

@@ -6,6 +6,7 @@ import Home from "./pages/Home/Home";
 import CreatePost from "./pages/CreatePost/CreatePost";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AuthRoute from "./components/AuthRoute";
+import Comment from "./pages/comment/Comment";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/home" element={<Home />} />
           <Route path="/create" element={<CreatePost />} />
+          <Route path="/comment" element={<Comment />} />
         </Route>
       </Routes>
     </BrowserRouter>
